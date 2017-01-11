@@ -1,0 +1,81 @@
+body, html {
+  font-family: 'VT323', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  user-select: none;
+  cursor: default;
+  background: #333;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+header {
+  text-align: center;
+  padding: 1px;
+}
+.game-control {
+  text-align: center;
+}
+.levels {
+  padding: 10px 0 30px;
+}
+.level {
+  cursor: pointer;
+  padding: 5px 0;
+  margin: 0 10px;
+}
+.info span {
+  padding-right: 20px;
+}
+#restart-btn {
+  fill: #fff;
+  width: 30px;
+  height: 30px;
+
+  position: relative;
+  top: 13px;
+
+  cursor: pointer;
+}
+#board {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.cell {
+  color: #fff;
+  background: #666;
+  width: 30px;
+  height: 30px;
+  margin: 1px;
+  line-height: 30px;
+  font-size: 28px;
+  text-align: center;
+}
+
+#slide {
+  pointer-events: none;
+  display: none;
+
+  text-transform: uppercase;
+  font-size: 220px;
+
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  /*display: flex;*/
+  justify-content: flex-end;
+
+  left: 0%;
+  transition: left .4s ease-in-out;
+}
+.msg-container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
