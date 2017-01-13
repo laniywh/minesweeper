@@ -8,6 +8,7 @@
 </head>
 <body id="body" oncontextmenu="return false;">
 
+
   <div id="slide">
     <div class="msg-container">
       <div id="msg"></div>
@@ -34,8 +35,30 @@
 
   <div id="board"></div>
 
+  <!-- SCOREBOARD
+  ================================================ -->
+  <div class="scoreboards-container">
+    <h2 class="scoreboards-title">Scoreboards</h2>
+    <input type="text" name="username" id="username" placeholder="Type your name...">
+
+    <div class="scoreboards">
+      <div class="beginner-board scoreboard">
+        <h3 class="scoreboard-title">Beginner</h3>
+        <ol class="scores"></ol>
+      </div>
+      <div class="intermediate-board scoreboard">
+        <h3 class="scoreboard-title">Intermediate</h3>
+        <ol class="scores"></ol>
+      </div>
+      <div class="expert-board scoreboard">
+        <h3 class="scoreboard-title">Expert</h3>
+        <ol class="scores"></ol>
+      </div>
+    </div>
+  </div>
 
 
+  <script src="modernizr.js"></script>
   <script src="scripts.js"></script>
 </body>
 </html>

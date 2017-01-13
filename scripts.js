@@ -1,6 +1,100 @@
+var Scoreboard = (function() {
+  var NUM_OF_TOP_SCORES = 10;
+
+  var scoreboardDiv = document.querySelector('#account');
+  var beginnerBoard = document.querySelector('.scoreboards .beginner-board');
+  var intermediateBoard = document.querySelector('.scoreboards .intermediate-board');
+  var expertBoard = document.querySelector('.scoreboards .expert-board');
+  var username = document.querySelector('#username');
+  var scores;
+
+
+  var init = function() {
+    loadScores();
+    restoreUsername();
+    showHighScores();
+  }
+
+
+  var loadScores = function() {
+    if(localStorage.scores) {
+      scores = JSON.parse(localStorage.scores);
+    } else {
+      scores = {
+        'beginner': [],
+        'intermediate': [],
+        'expert': []
+      };
+    }
+  }
+
+
+  var restoreUsername = function() {
+    username.value = localStorage.prevUser || '';
+  }
+
+
+  var showHighScores = function() {
+    Object.keys(scores).forEach(showBoard);
+  }
+
+
+  var saveScore = function(difficulty, time) {
+
+    scores[difficulty].push({time: time, user: username.value});
+    scores[difficulty].sort(compareScores);
+
+    localStorage.scores = JSON.stringify(scores);
+    localStorage.prevUser = username.value;
+
+    updateScoreBoard(difficulty);
+  }
+
+  /* ----------------- Helpers ---------------------- */
+
+  var showBoard = function(difficulty) {
+    var scoresList = document.querySelector(`.${difficulty}-board .scores`);
+    var html = '';
+
+    for (var i = 0; i < NUM_OF_TOP_SCORES; i++) {
+      if(i < scores[difficulty].length) {
+        var score = scores[difficulty][i] || '';
+        html += `<li>${score.time}s <span>${score.user}</span></li>`;
+      } else {
+        html += `<li></li>`;
+      }
+    }
+
+    scoresList.innerHTML = html;
+  }
+
+
+  var updateScoreBoard = function(difficulty) {
+    showBoard(difficulty);
+  }
+
+
+  var localStorageError = function() {
+    alert('Your browser does not support local storege. Request cannot be completed.');
+  }
+
+
+  var compareScores = function(a, b) {
+    return a.time - b.time;
+  }
+
+
+  return {
+    init: init,
+    saveScore: saveScore,
+  }
+})();
+
+
+
 var Minesweeper = (function() {
   var difficulties = {
-    beginner: { width: 9, height: 9, numOfMines: 10 },
+    beginner: { width: 9, height: 9, numOfMines: 3 },
     intermediate: { width: 16, height: 16, numOfMines: 40 },
     expert: { width: 30, height: 16, numOfMines: 99 },
   };
@@ -10,6 +104,7 @@ var Minesweeper = (function() {
   var hideBgColor = '#666';
   var infoNumDigits = 3;
   var timerInterval = undefined;
+  var currDifficulty;
 
   var msgSlide = document.getElementById('slide');
 
@@ -30,9 +125,11 @@ var Minesweeper = (function() {
   };
 
   var initApp = function() {
-    setDifficulty('beginner');   // Set difficulty
+    currDifficulty = 'beginner';
+    setDifficulty(currDifficulty);   // Set difficulty
     lvlListener();
     init();
+    Scoreboard.init();
   };
 
 
@@ -61,6 +158,7 @@ var Minesweeper = (function() {
     lvlNames.forEach(function(lvl) {
       document.getElementById(lvl).addEventListener('click', function() {
         setDifficulty(lvl);
+        currDifficulty = lvl;
         restart();
       });
     });
@@ -174,6 +272,7 @@ var Minesweeper = (function() {
           gameOver();
         }
 
+        if(win()) winGame();
       }
     }
   };
@@ -209,7 +308,7 @@ var Minesweeper = (function() {
       revealNeighbors(cellElem);
     }
 
-    if(win()) winGame();
+    // if(win()) winGame();
 
     return true;
   };
@@ -223,6 +322,10 @@ var Minesweeper = (function() {
 
   var winGame = function() {
     document.getElementById('msg').innerHTML = 'You Win!';
+
+    // save score
+    Scoreboard.saveScore(currDifficulty, time);
+
     stopGame();
   };
 
@@ -244,8 +347,6 @@ var Minesweeper = (function() {
 
 
   var showMsg = function() {
-    console.log('show msg');
-
     msgSlide.style.display = 'flex';
     setTimeout(slideIn, 100);
   };
@@ -525,6 +626,5 @@ var Minesweeper = (function() {
     initApp: initApp,
   }
 })();
-
 
 Minesweeper.initApp();

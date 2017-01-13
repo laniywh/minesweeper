@@ -1,3 +1,55 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  /*list-style: none;*/
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ---------------------------------
+   MY STYLES
+   --------------------------------- */
 body, html {
   font-family: 'VT323', sans-serif;
   font-size: 20px;
@@ -11,7 +63,8 @@ body, html {
 }
 header {
   text-align: center;
-  padding: 1px;
+  padding: 40px;
+  font-size: 3em;
 }
 .game-control {
   text-align: center;
@@ -79,3 +132,67 @@ header {
   align-items: center;
   justify-content: center;
 }
+
+
+/* ==== SCOREBOARD ==== */
+.scoreboards-container {
+  width: 800px;
+  margin: 60px auto;
+  text-align: center;
+}
+.scoreboards-title {
+  font-size: 2.5em;
+  text-align: center;
+}
+#username {
+  background: #333;
+
+  color: #fff;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'VT323', sans-serif;
+
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #666;
+
+  margin: 20px;
+}
+
+#username:focus {
+  border-bottom: 2px solid #fff;
+
+}
+
+.scoreboards {
+  display: flex;
+  flex-direction: row;
+}
+.scoreboard {
+  flex: 1;
+  padding: 20px;
+  background: #666;
+  margin: 10px;
+}
+
+.scoreboard-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scores {
+  list-style-type: decimal;
+  list-style-position: inside;
+  text-align: left;
+}
+
+.scoreboard li {
+  border-bottom: 2px solid #333;
+  margin-bottom: 5px;
+  padding: 3px;
+}
+
+.scoreboard li span {
+  float: right;
+}
+
