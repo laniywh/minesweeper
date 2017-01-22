@@ -1,6 +1,6 @@
 A Javascript version of Minesweeper, the classic Windows game. This project is made for [The Odin Project](http://theodinproject.com)'s [Project: Minesweeper in Javascript](http://www.theodinproject.com/courses/javascript-and-jquery/lessons/minesweeper).
 
-[Play Now!](https://cdn.rawgit.com/laniywh/the-odin-project/master/js/minesweeper/index.html)
+[Play Now!](http://lanihuang.com/minesweeper)
 
 ## What I've learned
 - OOP for JS using module pattern
